@@ -1,0 +1,24 @@
+{
+    "headerData":{
+        "pagination":{
+                 "paginationFlag" : true, 
+                 "paginationKey":"2233" 
+                   }
+    },
+    "listProfessionalsOutputType": {
+        "professionals" : [
+                {"name":"Electricista1", "legalGuardian":"Juan Antonio Lopez", "rate" : 1.4, "description":"Especialistas en alta tensión1.", "location" : {"latitude" : -54.34343, "longitude" : 34.4444555, "description" : "Cerca de tí"},  "categories" : [{"id" : "Electricista" ,"dischargedate":"20170830" }]},
+                {"name":"Electricista2", "legalGuardian":"Electricista2", "rate" : 3.4, "description":"Especialistas en alta tensión2.", "location" : {"latitude" : -54.34343, "longitude" : 34.4444555, "description" : "Cerca de tí"},  "categories" : [{"id" : "Electricista" ,"dischargedate":"20170830" }]},
+                {"name":"Electricista3", "legalGuardian":"Electricista3", "rate" : 3.5, "description":"Especialistas en alta tensión3", "location" : {"latitude" : -54.34343, "longitude" : 34.4444555, "description" : "Cerca de tí"},  "categories" : [{"id" : "Electricista" ,"dischargedate":"20170830" }]},
+                {"name":"Electricista4", "legalGuardian":"Electricista4", "rate" : 4.4, "description":"Especialistas en alta tensión4", "location" : {"latitude" : -54.34343, "longitude" : 34.4444555, "description" : "Cerca de tí"},  "categories" : [{"id" : "Electricista" ,"dischargedate":"20170830" }]},
+                {"name":"Electricista5", "legalGuardian":"Electricista5", "rate" : 3.2, "description":"Especialistas en alta tensión5", "location" : {"latitude" : -54.34343, "longitude" : 34.4444555, "description" : "Cerca de tí"},  "categories" : [{"id" : "Electricista" ,"dischargedate":"20170830" }]},
+                {"name":"Electricista6", "legalGuardian":"Electricista6", "rate" : 1.4, "description":"Especialistas en alta tensión6", "location" : {"latitude" : -54.34343, "longitude" : 34.4444555, "description" : "Cerca de tí"},  "categories" : [{"id" : "Electricista" ,"dischargedate":"20170830" }]},
+                {"name":"Electricista7", "legalGuardian":"Electricista7", "rate" : 0.3, "description":"Especialistas en alta tensión7", "location" : {"latitude" : -54.34343, "longitude" : 34.4444555, "description" : "Cerca de tí"},  "categories" : [{"id" : "Electricista" ,"dischargedate":"20170830" }]},
+                {"name":"Electricista8", "legalGuardian":"Electricista3", "rate" : 3.7, "description":"Especialistas en alta tensión8", "location" : {"latitude" : -54.34343, "longitude" : 34.4444555, "description" : "Cerca de tí"},  "categories" : [{"id" : "Electricista" ,"dischargedate":"20170830" }]},
+                {"name":"Electricista9", "legalGuardian":"Electricista3", "rate" : 1.2, "description":"Especialistas en alta tensión9", "location" : {"latitude" : -54.34343, "longitude" : 34.4444555, "description" : "Cerca de tí"},  "categories" : [{"id" : "Electricista" ,"dischargedate":"20170830" }]},
+                {"name":"Electricista10", "legalGuardian":"Electricista3", "rate" : 1.0, "description":"Especialistas en alta tensión10", "location" : {"latitude" : -54.34343, "longitude" : 34.4444555, "description" : "Cerca de tí"},  "categories" : [{"id" : "Electricista" ,"dischargedate":"20170830" }]}
+            ]
+
+    }
+
+}

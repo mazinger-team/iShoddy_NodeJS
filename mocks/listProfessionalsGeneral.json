@@ -1,0 +1,23 @@
+{
+    "headerData": {
+  },
+    "listProfessionalsOutputType": {
+        "professionals" : [
+                {"name":"Pintura el chopo S.L.", "legalGuardian":"Juan Antonio Lopez", "rate" : 3.4, "description":"Pinturas en general", "location" : {"latitude" : -54.34343, "longitude" : 34.4444555, "description" : "Cerca de tí"},  "categories" : [{"id" : "Pintor" ,"dischargedate":"20170830" }]},
+                {"name":"Carpinteria1", "legalGuardian":"Juan Manuel Ramiro", "rate" : 3.4, "description":"Pinturas en general", "location" : {"latitude" : -54.34343, "longitude" : 34.4444555, "description" : "Cerca de tí"},  "categories" : [{"id" : "Carpintero" ,"dischargedate":"20170830" }]},
+                {"name":"Juan Manuel S.L.", "legalGuardian":"Juan Manuel Ramiro", "rate" : 3.4, "description":"Reemplaamos su parqué en tiempo record. Especialistas en madera de kaoba.", "location" : {"latitude" : -54.34343, "longitude" : 34.4444555, "description" : "Cerca de tí"},  "categories" : [{"id" : "Parquetistas" ,"dischargedate":"20170830" }]},
+                {"name":"Juan Manuel S.L.", "legalGuardian":"Juan Manuel Ramiro", "rate" : 3.4, "description":"Tapizamos en piel", "location" : {"latitude" : -54.34343, "longitude" : 34.4444555, "description" : "Cerca de tí"},  "categories" : [{"id" : "Tapiceros" ,"dischargedate":"20170830" }]},
+                {"name":"Juan Manuel S.L.", "legalGuardian":"Juan Manuel Ramiro", "rate" : 3.4, "description":"Pinturas en general", "location" : {"latitude" : -54.34343, "longitude" : 34.4444555, "description" : "Cerca de tí"},  "categories" : [{"id" : "Electricistas" ,"dischargedate":"20170830" }]},
+                {"name":"Juan Manuel S.L.", "legalGuardian":"Juan Manuel Ramiro", "rate" : 3.4, "description":"Pinturas en general", "location" : {"latitude" : -54.34343, "longitude" : 34.4444555, "description" : "Cerca de tí"},  "categories" : [{"id" : "Electricistas" ,"dischargedate":"20170830" }]},
+                {"name":"Juan Manuel S.L.", "legalGuardian":"Juan Manuel Ramiro", "rate" : 3.4, "description":"Pinturas en general", "location" : {"latitude" : -54.34343, "longitude" : 34.4444555, "description" : "Cerca de tí"},  "categories" : [{"id" : "Electricistas" ,"dischargedate":"20170830" }]},
+                {"name":"Mudanzas Antoñito", "legalGuardian":"Juan Manuel Ramiro", "rate" : 3.4, "description":"Especialistas en todo tipo de mundanzas", "location" : {"latitude" : -54.34343, "longitude" : 34.4444555, "description" : "Cerca de tí"},  "categories" : [{"id" : "Mundanzas" ,"dischargedate":"20170830" }]},
+                {"name":"Mudanzas Amparo", "legalGuardian":"Juan Manuel Ramiro", "rate" : 3.4, "description":"Mudanzas de mercancias peligrosas.", "location" : {"latitude" : -54.34343, "longitude" : 34.4444555, "description" : "Cerca de tí"},  "categories" : [{"id" : "Mundanzas" ,"dischargedate":"20170830" }]},
+                {"name":"Tapicero mu buenos", "legalGuardian":"Juan Manuel Ramiro", "rate" : 3.4, "description":"Pinturas en general", "location" : {"latitude" : -54.34343, "longitude" : 34.4444555, "description" : "Cerca de tí"},  "categories" : [{"id" : "Tapicero" ,"dischargedate":"20170830" }]},
+                {"name":"Tapicero", "legalGuardian":"Juan Manuel Ramiro", "rate" : 3.4, "description":"Tapizamos su sofá en tiempo record¡¡¡", "location" : {"latitude" : -54.34343, "longitude" : 34.4444555, "description" : "Cerca de tí"},  "categories" : [{"id" : "Tapicero" ,"dischargedate":"20170830" }]},
+                {"name":"Pintores Tomas", "legalGuardian":"Tomas na más", "rate" : 3.4, "description":"Especialistas en pinturas plásticas", "location" : {"latitude" : -54.34343, "longitude" : 34.4444555, "description" : "Cerca de tí"},  "categories" : [{"id" : "Pintores" ,"dischargedate":"20170830" }]}
+
+            ]
+
+    }
+
+}

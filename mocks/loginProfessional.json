@@ -1,0 +1,21 @@
+{
+    "headerData": {
+    "errorData": {
+      "errorText": "",
+      "errorFlag": false,
+      "errorType": "T"
+    }
+  },
+    "loginOutputType": {
+    "lastConnectionDate" : "20170830",
+    "isProfessionalProfile" : true,
+    "userNickName": "i02cajid@hotmail.com",
+    "userLegalId" : "33509822H",
+    "userNumber" : "0000696887",
+    "userName" : "PALOMA",
+    "userFirstSurname" : "FLOREZ",
+    "userSecondSurname" : "NIETO",
+    "userLanguage" : "es",
+    "categories" : [{"id" : "Fontanero" ,"dischargedate":"20170830" }, {"id" : "Electricista" ,"dischargedate":"20170830" }]
+   }
+ }
