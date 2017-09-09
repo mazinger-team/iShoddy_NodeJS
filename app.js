@@ -32,7 +32,7 @@ app.use('/users', users);
 
 //rutas-mock
 //require('./mocks/mockroutes.js')(app);
-app.use('/services',mocks);
+app.use('/apiv1',mocks);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

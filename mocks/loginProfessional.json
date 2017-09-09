@@ -1,21 +1,44 @@
 {
-    "headerData": {
+  "headerData": {
     "errorData": {
       "errorText": "",
       "errorFlag": false,
       "errorType": "T"
     }
   },
-    "loginOutputType": {
+  "loginOutputType": {
+
     "lastConnectionDate" : "20170830",
     "isProfessionalProfile" : true,
-    "userNickName": "i02cajid@hotmail.com",
-    "userLegalId" : "33509822H",
-    "userNumber" : "0000696887",
-    "userName" : "PALOMA",
-    "userFirstSurname" : "FLOREZ",
-    "userSecondSurname" : "NIETO",
     "userLanguage" : "es",
-    "categories" : [{"id" : "Fontanero" ,"dischargedate":"20170830" }, {"id" : "Electricista" ,"dischargedate":"20170830" }]
-   }
- }
+    "id": 8384,
+    "user_id": 34,
+    "user_name": "Pascual Pérez",
+    "category_id": 86,
+    "subcategory_id": 12,
+    "corp_name": "Electricista1 S.L.",
+    "logo_url": "http://www.mylittlebusiness.biz/img/portfolio/8.jpg",
+    "images_url": ["image1_url", "image2_url"],
+    "description": "Pa que vayas y lo casques",
+    "fiscal_id": "B93849593",
+    "street": "Alcapone, 3",
+    "postal_code": 28001,
+    "area": "Centro",
+    "city": "Madrid",
+    "province": "Com. Madrid",
+    "gps_lat": "40.4180563",
+    "gps_lon": "-3.7010172999999895",
+    "web_url": "http://www.chiquitoipsum.com",
+    "email": "paca@chiquitoipsum.com",
+    "telephone": "914489022",
+    "opening_hours": "De 9 a 18h",
+    "register_date": "20170802",
+    "rate_visit": "40",
+    "rate_hour": "35",
+    "rate_notes": "tarifas 2017",
+    "rating_accumulated": 0,
+    "rating_votes": 0,
+    "rating": "0"
+  }
+
+}
