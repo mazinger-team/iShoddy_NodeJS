@@ -13,6 +13,7 @@ var interactors = require('./interactors/Professionals');
 
 var app = express();
 
+require('./lib/mongoConnection');
 
 
 // view engine setup
