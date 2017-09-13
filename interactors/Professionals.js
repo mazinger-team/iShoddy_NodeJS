@@ -18,4 +18,4 @@ getProfessionalsByCategory =  function(req, res, next) {
   
 
 
-module.exports = { getAllProfessionals, getProfessionalsByCategory };
+// module.exports = { getAllProfessionals, getProfessionalsByCategory };
