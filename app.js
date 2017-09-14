@@ -10,11 +10,13 @@ var users = require('./routes/users');
 var mocks = require('./mocks/mockroutes');
 var interactors = require('./interactors/Professionals');
 
-
 var app = express();
 
+// charge connection with mongoDB
 require('./lib/mongoConnection');
 
+// charge models
+require('./models/Professional');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -31,9 +33,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 
-//rutas-mock
-//require('./mocks/mockroutes.js')(app);
-app.use('/apiv1',mocks);
+// rutes (mock & real)
+// app.use('/apiv1', mocks);
+app.use('/apiv1', require('./routes/apiv1/professionals'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
