@@ -6,7 +6,7 @@ var routes = express.Router();
 
 
 
-routes.get('/getAllProfessional', function(req, res, next) {
+routes.get('/getProfessional', function(req, res, next) {
     res.send(data.postListProfessionals);
 });
 

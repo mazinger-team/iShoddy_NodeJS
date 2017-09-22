@@ -11,18 +11,19 @@ var professionalSchema = mongoose.Schema({
     subcategory: String,    // Si usamos Id tipo Number?
     corp_name: String,
     logo_url: String,
-    images_url: String,
+    images_url: [String],
     description: String,
     fiscal_id: String,
     street: String,
-    postal_code: Number,
+    postal_code: String,
     area: String,
     city: String,
     province: String,
-    gps: Object,
+    gps_lat: Number,
+    gps_lon: Number,
     web_url: String,
     email: String,
-    telephone: Number,
+    telephone: String,
     opening_hours: String,
     register_date: Date,
     rate_visit: Number,
@@ -30,7 +31,45 @@ var professionalSchema = mongoose.Schema({
     rate_notes: String,
     rating_accumulated: Number,
     rating_votes: Number,
-    rating: Number
+    rating: Number,
+    reviews_number: Number,
+    photo_number: Number
+
+
+    /*
+    public var id : Int?
+    public var user_id : Int?
+    public var user_name : String?
+    public var demands_id : Array<Int>?
+    public var category_id : Int?
+    public var subcategory_id : Int?
+    public var corp_name : String?
+    public var logo_url : String?
+    public var images_url : Array<String>?
+    public var description : String?
+    public var fiscal_id : String?
+    public var street : String?
+    public var postal_code : String?
+    public var area : String?
+    public var city : String?
+    public var province : String?
+    public var gps_lat : Double?
+    public var gps_lon : Double?
+    public var web_url : String?
+    public var email : String?
+    public var telephone : String?
+    public var opening_hours : String?
+    public var register_date : Int?
+    public var rate_visit : Int?
+    public var rate_hour : Int?
+    public var rate_notes : String?
+    public var rating_accumulated : Int?
+    public var rating_votes : Int?
+    public var rating : Double?
+    public var reviews_number : Int?
+    public var photo_number : Int?
+    public var distance : Double?
+     */
 
 }, {
     versionKey: false // No añade parámetro de version (__v)
