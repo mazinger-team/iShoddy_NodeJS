@@ -5,9 +5,10 @@ Start iShoddy Node: npm start
 **PROFESSIONAL**
 * **Query:** GET http://ec2-54-202-209-58.us-west-2.compute.amazonaws.com/api/v1/professionals
   * Parameters
-    * id - Professional id
-    * name - Professional name
-    ...
+    * Query 
+        * id - Professional id
+        * name - Professional name
+        ...
     
   * Output - JSON format
     
@@ -72,7 +73,8 @@ Start iShoddy Node: npm start
     
 * **Add:** GET http://ec2-54-202-209-58.us-west-2.compute.amazonaws.com/api/v1/professionals
   * Parameters
-  ...
+    * Body
+        * Professional fields 
 
   * Output - JSN format
  
@@ -135,8 +137,12 @@ Start iShoddy Node: npm start
     }
     ```
 
-* **Edit:** PUT http://ec2-54-202-209-58.us-west-2.compute.amazonaws.com/api/v1/professionals/ **:id**
+* **Edit:** PUT http://ec2-54-202-209-58.us-west-2.compute.amazonaws.com/api/v1/professionals
   * Parameters
+    * Query 
+        * id: Professional id
+    * Body
+        * Professional fields 
   ...
 
   * Outpur - JSON format
@@ -200,4 +206,7 @@ Start iShoddy Node: npm start
     }
     ```
     
-* **Delete:** DELETE http://ec2-54-202-209-58.us-west-2.compute.amazonaws.com/api/v1/professionals/ **:id**
+* **Delete:** DELETE http://ec2-54-202-209-58.us-west-2.compute.amazonaws.com/api/v1/professionals
+  * Parameters
+    * Query 
+        * id: Professional id
