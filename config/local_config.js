@@ -8,6 +8,5 @@ module.exports = {
     },
     tags: ['work', 'lifestyle', 'motor', 'mobile'],
     languages: ['en', 'es'],
-    num_rows: 10,
-    DEBUG_TRACE : true
+    DEBUG_TRACE_LEVEL : 0
 };

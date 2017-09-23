@@ -1,48 +1,109 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+'use strict';
 
-var index = require('./routes/index');
-var users = require('./routes/users');
-var mocks = require('./mocks/mockroutes');
-var interactors = require('./interactors/Professionals');
+let DEBUG_TRACE_LEVEL = require('./config/local_config').DEBUG_TRACE_LEVEL;
 
-var app = express();
+let express = require('express');
+let bodyParser = require('body-parser');
+
+let path = require('path');
+let favicon = require('serve-favicon');
+let logger = require('morgan');
+let cookieParser = require('cookie-parser');
+
+if (DEBUG_TRACE_LEVEL >= 2) {
+    console.log('1.app');
+}
+
+
+let routes = require('./index');
+
+if (DEBUG_TRACE_LEVEL >= 2) {
+    console.log('2.app');
+}
+
+
+let app = express();
+
+app.use(bodyParser.urlencoded({ extended: false }));
+//We convert json objects to the data we receive from http requests
+app.use(bodyParser.json());
+app.use(logger('dev'));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+// uncomment after placing your favicon in /public
+//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+
+if (DEBUG_TRACE_LEVEL >= 2) {
+    console.log('3.app');
+}
+
 
 // charge connection with mongoDB
 require('./lib/mongoConnection');
 
+if (DEBUG_TRACE_LEVEL >= 2) {
+    console.log('4.app');
+}
+
+
+////// We load the Routes ////////
+/// Professionals ///
+let professional_routes = require('./routes/api/v1/professional');
+/// Users ///
+let user_routes = require('./routes/api/v1/user');
+
+/// Mocks ///
+let mocks_routes = require('./mocks/mockroutes');
+
+//let interactor_routes = require('./interactors/Professionals');
+let index_routes = require('./index');
+
+if (DEBUG_TRACE_LEVEL >= 2) {
+    console.log('5.app');
+}
+
+
+//////// Here we configure the headers //////////
+
+//////// Here are the Routes base //////////
+app.use('/api/v1', professional_routes);
+
+if (DEBUG_TRACE_LEVEL >= 2) {
+    console.log('6.app');
+}
+
+
 // charge models
-require('./models/Professional');
+//require('./models/Professional');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+if (DEBUG_TRACE_LEVEL >= 2) {
+    console.log('7.app');
+}
 
-app.use('/', index);
+
+/*
+app.use('/', index_routes);
 app.use('/users', users);
 
 // rutes (mock & real)
-// app.use('/apiv1', mocks);
-app.use('/apiv1', require('./routes/apiv1/professionals'));
+app.use('/api/v1', require('./controllers/professionals/professionals'));
+*/
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
+  let err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
+
+if (DEBUG_TRACE_LEVEL >= 2) {
+    console.log('8.app');
+}
+
 
 // error handler
 app.use(function(err, req, res, next) {
@@ -55,4 +116,14 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+if (DEBUG_TRACE_LEVEL >= 2) {
+    console.log('9.app');
+}
+
+
+//We export the Module
 module.exports = app;
+
+if (DEBUG_TRACE_LEVEL >= 2) {
+    console.log('10.app');
+}

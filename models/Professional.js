@@ -1,9 +1,12 @@
 "use strict";
 
-var mongoose = require('mongoose');
+// We import the mongoose library
+let mongoose = require('mongoose');
+// It allows us to create an outline of an object to save inside the collection
+let Schema = mongoose.Schema;
 
-var professionalSchema = mongoose.Schema({
-
+// We create the schema of the object
+let ProfessionalSchema = Schema({
     user_id: String,
     user_name: String,
     demands: [String],
@@ -76,26 +79,5 @@ var professionalSchema = mongoose.Schema({
 
 });
 
-
-// static methods
-professionalSchema.statics.list = function(filter, sort, limit, skip, fields) {
-    return new Promise(function(resolve, reject) {
-        var query = Professional.find(filter).
-        sort(sort).
-        limit(limit).
-        skip(skip).
-        select(fields).
-        exec(function(err, result) {
-            if (err) {
-                reject(err);
-                return;
-            }
-            resolve(result);
-        });
-    });
-};
-
-
-
 // Export schema
-var Professional = mongoose.model('Professional', professionalSchema);
+module.exports = mongoose.model('Professional', ProfessionalSchema);
