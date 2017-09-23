@@ -19,7 +19,7 @@ function responseHandler(msg, res, sta, element, typeElement, page) {
 
     let filter = {
         headerData: {
-            pagination: {
+            paginationData: {
                 paginationFlag: element.length === parameters.query.num_elements,
                 paginationKey: page,
                 paginationElements: element.length
