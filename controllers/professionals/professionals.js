@@ -39,12 +39,11 @@ function saveProfessional(req, res) {
         console.log('**** FUNCTION professional.saveProfessional ****');
     }
 
-    let professional = new Professional();
-    let saveParams = req.body;
+    let professional = new Professional(req.body);
 
     if (DEBUG_TRACE_LEVEL >= 2) {
         console.log('Parameters before entering function');
-        console.log('saveParams.name', saveParams);
+        console.log('req.body', req.body);
     }
 
     professional.save((err, professionalSave) => {
