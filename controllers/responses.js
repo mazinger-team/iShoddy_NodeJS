@@ -28,12 +28,12 @@ function responseHandler(msg, res, sta, element, typeElement, page) {
     };
 
     switch(typeElement) {
-        case "listProfessionalsOutputType":
+        case parameters.models.professionals:
             filter["listProfessionalsOutputType"] = {
                 professionals: [ element ]
             };
             break;
-        case "listCategoriesOutputType":
+        case parameters.models.categories:
             filter["listCategoriesOutputType"] = {
                 categories: [ element ]
             };
