@@ -10,16 +10,18 @@ Start iShoddy Node: npm start
     ...
     
   * Output - JSON format
+    
     ```json
     {
-      "headerData": {
-        pagination: {
-            paginationFlag: bool,
-            paginationKey: pagination page,
-            paginationElements: number of elements returned
+        "headerData": {
+            "paginationData": {
+                "paginationFlag": true, //More pages
+                "paginationKey": 2, //Number of actual page
+                "paginationElements": 10 // number of elements returned
+            }
         },
-        listProfessionalsOutputType: {
-            professional: [
+        "listProfessionalsOutputType": {
+            "professional": [
                 {
                     "id": 8384,
                     "user_id": 34,
@@ -61,28 +63,30 @@ Start iShoddy Node: npm start
                     "distance": 100
                 },
                 {
-                  "..." : "..."
+                    "..." : "..."
                 }
             ]
         }
-      }
     }
+    ```
     
 * **Add:** GET http://ec2-54-202-209-58.us-west-2.compute.amazonaws.com/api/v1/professionals
   * Parameters
   ...
 
   * Output - JSN format
+ 
     ```json
     {
-      "headerData": {
-        pagination: {
-            paginationFlag: bool,
-            paginationKey: pagination page,
-            paginationElements: number of elements returned
+        "headerData": {
+            "paginationData": {
+                "paginationFlag": true, //More pages
+                "paginationKey": 2, //Number of actual page
+                "paginationElements": 10 // number of elements returned
+            }
         },
-        listProfessionalsOutputType: {
-            professional: [
+        "listProfessionalsOutputType": {
+            "professional": [
                 {
                     "id": 8384,
                     "user_id": 34,
@@ -122,10 +126,12 @@ Start iShoddy Node: npm start
                     "reviews_number": 6,
                     "photo_number": 15,
                     "distance": 100
+                },
+                {
+                    "..." : "..."
                 }
             ]
         }
-      }
     }
     ```
 
@@ -134,16 +140,18 @@ Start iShoddy Node: npm start
   ...
 
   * Outpur - JSON format
+
     ```json
     {
-      "headerData": {
-        pagination: {
-            paginationFlag: bool,
-            paginationKey: pagination page,
-            paginationElements: number of elements returned
+        "headerData": {
+            "paginationData": {
+                "paginationFlag": true, //More pages
+                "paginationKey": 2, //Number of actual page
+                "paginationElements": 10 // number of elements returned
+            }
         },
-        listProfessionalsOutputType: {
-            professional: [
+        "listProfessionalsOutputType": {
+            "professional": [
                 {
                     "id": 8384,
                     "user_id": 34,
@@ -183,10 +191,12 @@ Start iShoddy Node: npm start
                     "reviews_number": 6,
                     "photo_number": 15,
                     "distance": 100
+                },
+                {
+                    "..." : "..."
                 }
             ]
         }
-      }
     }
     ```
     
