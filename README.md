@@ -128,9 +128,6 @@ Start iShoddy Node: npm start
                     "reviews_number": 6,
                     "photo_number": 15,
                     "distance": 100
-                },
-                {
-                    "..." : "..."
                 }
             ]
         }
@@ -197,9 +194,6 @@ Start iShoddy Node: npm start
                     "reviews_number": 6,
                     "photo_number": 15,
                     "distance": 100
-                },
-                {
-                    "..." : "..."
                 }
             ]
         }
