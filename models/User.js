@@ -12,12 +12,13 @@ var userSchema = Schema({
     telephone: Number,
     addresses : [{type: Schema.ObjectId, ref: "Address" }],
     professionals : [{type: Schema.ObjectId, ref: "Professional" }],
+    demands: [{ type: Schema.ObjectId, ref: "Demand" }],
     favorites : [{type: Schema.ObjectId, ref: "Professional" }],
     creditCards: [{type: Schema.ObjectId, ref: "CreditCard" }],
     ratingAccumulate: Number,
-    retingVotes: Number,
+    ratingVotes: Number,
     rating: Number,
-    created:{type: Date, default: Date.now }
+    modificationDay:{type: Date, default: Date.now }
 
 }, {
     versionKey: false   // No añade parámetro de version (__v)
@@ -25,23 +26,6 @@ var userSchema = Schema({
 });
 
 
-// static methods
-userSchema.statics.list = function(filter, sort, limit, skip, fields) {
-    return new Promise(function(resolve, reject) {
-        var query = User.find(filter).
-        sort(sort).
-        limit(limit).
-        skip(skip).
-        select(fields).
-        exec(function(err, result) {
-            if (err) {
-                reject(err);
-                return;
-            }
-            resolve(result);
-        });
-    });
-};
 
 
 // Export schema

@@ -62,12 +62,12 @@ require('./models/User');
 let professional_routes = require('./routes/api/v1/professional');
 let categories_routes = require('./routes/api/v1/categories');
 let subcategories_routes = require('./routes/api/v1/subcategories');
-let user_routes = require('./routes/api/v1/user');
-// let address_routes = require('./routes/api/v1/address');
-// let creditcards_routes = require('./routes/api/v1/creditcards');
-// let demands_routes = require('./routes/api/v1/demands');
-// let offers_routes = require('./routes/api/v1/offers');
-// let offerconcepts_routes = require('./routes/api/v1/offerconcepts');
+let offers_routes = require('./routes/api/v1/offers');
+let offerconcepts_routes = require('./routes/api/v1/offerconcepts');
+let user_routes = require('./routes/api/v1/user/user');
+let address_routes = require('./routes/api/v1//user/address');
+let creditcards_routes = require('./routes/api/v1/user/creditcards');
+let demands_routes = require('./routes/api/v1/user/demands');
 
 
 /// Mocks ///
@@ -87,12 +87,12 @@ if (DEBUG_TRACE_LEVEL >= 2) {
 app.use('/api/v1/', professional_routes);
 app.use('/api/v1/categories', categories_routes);
 app.use('/api/v1/subcategories', subcategories_routes);
-app.use('/api/v1/user', user_routes);
-// app.use('/api/v1/address', address_routes);
-// app.use('/api/v1/creditcards', creditcards_routes);
-// app.use('/api/v1/demands', demands_routes);
-// app.use('/api/v1/offers', offers_routes);
-// app.use('/api/v1/offerconcepts', offerconcepts_routes);
+app.use('/api/v1/offers', offers_routes);
+app.use('/api/v1/offerconcepts', offerconcepts_routes);
+app.use('/api/v1/user/user', user_routes);
+app.use('/api/v1/user/address', address_routes);
+app.use('/api/v1/user/creditcards', creditcards_routes);
+app.use('/api/v1/user/demands', demands_routes);
 
 
 if (DEBUG_TRACE_LEVEL >= 2) {

@@ -5,11 +5,12 @@ var Schema = mongoose.Schema;
 
 var creditCardSchema = Schema({
 
-    user: { type: Schema.ObjectId, ref: "User" },
+    userId: String,
+    titular: String,
     cardNumber: Number,
-    expiry_date: Date,
+    expiry_date: String,
     cvv: Number,
-    created:{type: Date, default: Date.now }
+    modificationDay: { type: Date, default: Date.now }
 
 }, {
     versionKey: false   // No añade parámetro de version (__v)

@@ -6,18 +6,17 @@ var Schema = mongoose.Schema;
 
 var addressSchema = Schema({
 
-    user: { type: Schema.ObjectId, ref: "User" },
+    description: String,
+    userId: String,
     street: String,
     area: String,
-    city: String,
-    // city : [{type: Schema.ObjectId, ref: "City" }],
+    city : String,
     province: String,
-    // province : [{type: Schema.ObjectId, ref: "Province" }],
+    country : String,
     postalCode: Number,
-    gps: Object,
-    country: String,
-    created:{type: Date, default: Date.now }
-    // country : [{type: Schema.ObjectId, ref: "Country" }],
+    gps_lat: Number,
+    gps_lon: Number,
+    modificationDay:{type: Date, default: Date.now }
 
 }, {
     versionKey: false   // No añade parámetro de version (__v)

@@ -6,7 +6,11 @@ var Schema = mongoose.Schema;
 var offerConceptSchema = Schema({
 
     concept: String,
+    userId: String,
+    offerId: String,
     prize: Number,
+    quantity: Number,
+    totalPrize: Number,
     coin: String,
     description: String
 

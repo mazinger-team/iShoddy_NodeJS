@@ -6,23 +6,18 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var Category = mongoose.model('Category');
 
+let getList = require('./../../../controllers/getRoute');
+let postRoute = require('./../../../controllers/postRoute');
+let putRoute = require('./../../../controllers/putRoute');
+let deleteRoute = require('./../../../controllers/deleteRoute');
+
+let model = Category;
+
 
 router.get('/', function (req, res, next) {
 
-    var sort = "name";
-    var limit = req.query.limit || null;
-    var skip = parseInt(req.query.skip) || 0;
-    var fields = req.query.fields || null;
-    var id = req.query.id;
-
-    var filter = {};
-
-    if (typeof id !== 'undefined') {
-        filter._id = id;
-    }
-
-
-    Category.list(filter, sort, limit, skip, fields)
+    let sort = "name";
+    getList(model, req, res, next, sort)
         .then(function (categories) {
             return Category.populate(categories, {path: "subcategories" });
         })
@@ -45,45 +40,23 @@ router.get('/', function (req, res, next) {
 
 
 router.post('/', function (req, res, next) {
-
-    var category = new Category(req.body);
-    category.save(function (err, categorySave) {
-        if (err) {
-            next(err);
-            return;
-        }
-        res.json({success: true, category: categorySave});
-    })
+    let newModel = new Category(req.body);
+    postRoute(newModel, req, res, next);
 });
 
 
 router.put('/:id', function (req, res, next) {
-
     var id = req.params.id;
-    Category.update({_id: id}, req.body, function(err, category) {
-        if (err) {
-            next(err);
-            return;
-        }
-        res.json({success: true, category: category});
-    });
+    putRoute(model, id, req, res, next);
 
 });
 
 
 router.delete('/:id', function (req, res, next) {
-
     var id = req.params.id;
-    Category.remove({_id: id}, function(err, category) {
-        if (err) {
-            next(err);
-            return;
-        }
-        res.json({success: true, category: category});
-    });
+    deleteRoute(model, id, req, res, next);
 
 });
-
 
 
 

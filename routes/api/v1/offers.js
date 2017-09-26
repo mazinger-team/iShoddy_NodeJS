@@ -4,30 +4,34 @@ var express = require('express');
 var router = express.Router();
 
 var mongoose = require('mongoose');
-var Subcategory = mongoose.model('Subcategory');
+var Offer = mongoose.model('Offer');
 
 let getList = require('./../../../controllers/getRoute');
 let postRoute = require('./../../../controllers/postRoute');
 let putRoute = require('./../../../controllers/putRoute');
 let deleteRoute = require('./../../../controllers/deleteRoute');
 
-let model = Subcategory;
+let model = Offer;
 
 
 router.get('/', function (req, res, next) {
 
-    let sort = "name";
+    let sort = null;
     getList(model, req, res, next, sort)
-        .then(function (subcategories) {
-            return Subcategory.populate(subcategories, {path: "category", select: "name"});
+        .then(function (offers) {
+            return Offer.populate(offers, {path: "offerConcept" });
         })
-        .then(function (subcategories) {
+        .then(function (offers) {
             res.json({
                 "headerData": {
-                    success: true
+                    success: true,
+                    "pagination": {
+                        "paginationFlag": false,
+                        "paginationKey": ""
+                    }
                 },
-                "listSubcategoryOutputType": {
-                    "subcategories": subcategories
+                "listOffersOutputType": {
+                    "offers": offers
                 }
             })
         }).catch(next);
@@ -36,7 +40,7 @@ router.get('/', function (req, res, next) {
 
 
 router.post('/', function (req, res, next) {
-    let newModel = new Subcategory(req.body);
+    let newModel = new Offer(req.body);
     postRoute(newModel, req, res, next);
 });
 
@@ -53,6 +57,7 @@ router.delete('/:id', function (req, res, next) {
     deleteRoute(model, id, req, res, next);
 
 });
+
 
 
 module.exports = router;

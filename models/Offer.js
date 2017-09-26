@@ -5,18 +5,20 @@ var Schema = mongoose.Schema;
 
 var offerSchema = Schema({
 
-    offerLines: { type: Schema.ObjectId, ref: "OfferConcept" },
-    demands: [{ type: Schema.ObjectId, ref: "Demand" }],
-    professional: { type: Schema.ObjectId, ref: "Professional" },
-    user: { type: Schema.ObjectId, ref: "User" },
+    title: String,
+    userIdClient: String,
+    userIdProfess: String,
+    professionalId: String,
+    offerConcepts: [{ type: Schema.ObjectId, ref: "OfferConcept" }],
+    demandId: String,
     totalPrize: Number,
     coin: String,
-    date: Date,                 // hour included
+    date: Date,
     description: String,
-    estimatedDuration: Number,    // days
+    estimatedDaysDuration: Number,
     estimatedDayToInit: Date,
     Accept: Boolean,
-    created:{type: Date, default: Date.now }
+    modificationDay:{type: Date, default: Date.now }
 
 }, {
     versionKey: false   // No añade parámetro de version (__v)

@@ -6,25 +6,21 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
 
+let getList = require('./../../../../controllers/getRoute');
+let postRoute = require('./../../../../controllers/postRoute');
+let putRoute = require('./../../../../controllers/putRoute');
+let deleteRoute = require('./../../../../controllers/deleteRoute');
+
+let model = User;
+
+
 
 router.get('/', function (req, res, next) {
 
-    var sort = req.query.sort || null;
-    var limit = req.query.limit || null;
-    var skip = parseInt(req.query.skip) || 0;
-    var fields = req.query.fields || null;
-
-    var id = req.query.id;
-
-    var filter = {};
-
-    if (typeof id !== 'undefined') {
-        filter._id = id;
-    }
-
-    User.list(filter, sort, limit, skip, fields)
+    let sort = "name";
+    getList(model, req, res, next, sort)
         .then(function (users) {
-            return User.populate(users, {path: "addresses"});
+            return User.populate(users, {path: "addresses", select: "description"});
         })
         .then(function (users) {
             return User.populate(users, {path: "professionals", select: ["description", "subcategory"]});
@@ -34,6 +30,9 @@ router.get('/', function (req, res, next) {
         })
         .then(function (users) {
             return User.populate(users, {path: "creditCards", select: "cardNumber"});
+        })
+        .then(function (users) {
+            return User.populate(users, {path: "demands", select: ["title", "active"]});
         })
         .then(function (users) {
             res.json({
@@ -50,42 +49,23 @@ router.get('/', function (req, res, next) {
 
 
 router.post('/', function (req, res, next) {
+    let newModel = new User(req.body);
+    postRoute(newModel, req, res, next);
 
-    var user = new User(req.body);
-    user.save(function (err, userSave) {
-        if (err) {
-            next(err);
-            return;
-        }
-        res.json({success: true, user: userSave});
-    })
 });
 
 
 router.put('/:id', function (req, res, next) {
-
     var id = req.params.id;
-    User.update({_id: id}, req.body, function(err, user) {
-        if (err) {
-            next(err);
-            return;
-        }
-        res.json({success: true, user: user});
-    });
+    putRoute(model, id, req, res, next);
+
 
 });
 
 
 router.delete('/:id', function (req, res, next) {
-
     var id = req.params.id;
-    User.remove({_id: id}, function(err, user) {
-        if (err) {
-            next(err);
-            return;
-        }
-        res.json({success: true, user: user});
-    });
+    deleteRoute(model, id, req, res, next);
 
 });
 
