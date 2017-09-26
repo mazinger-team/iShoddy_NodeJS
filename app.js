@@ -46,11 +46,29 @@ if (DEBUG_TRACE_LEVEL >= 2) {
 }
 
 
+// Load models
+require('./models/Address');
+require('./models/Category');
+require('./models/CreditCard');
+require('./models/Demand');
+require('./models/Offer');
+require('./models/OfferConcept');
+// require('./models/Professional');
+require('./models/Subcategory');
+require('./models/User');
+
+
 ////// We load the Routes ////////
-/// Professionals ///
 let professional_routes = require('./routes/api/v1/professional');
-/// Users ///
-let user_routes = require('./routes/api/v1/user');
+let categories_routes = require('./routes/api/v1/categories');
+let subcategories_routes = require('./routes/api/v1/subcategories');
+let offers_routes = require('./routes/api/v1/offers');
+let offerconcepts_routes = require('./routes/api/v1/offerconcepts');
+let user_routes = require('./routes/api/v1/user/user');
+let address_routes = require('./routes/api/v1//user/address');
+let creditcards_routes = require('./routes/api/v1/user/creditcards');
+let demands_routes = require('./routes/api/v1/user/demands');
+
 
 /// Mocks ///
 let mocks_routes = require('./mocks/mockroutes');
@@ -66,7 +84,16 @@ if (DEBUG_TRACE_LEVEL >= 2) {
 //////// Here we configure the headers //////////
 
 //////// Here are the Routes base //////////
-app.use('/api/v1', professional_routes);
+app.use('/api/v1/', professional_routes);
+app.use('/api/v1/categories', categories_routes);
+app.use('/api/v1/subcategories', subcategories_routes);
+app.use('/api/v1/offers', offers_routes);
+app.use('/api/v1/offerconcepts', offerconcepts_routes);
+app.use('/api/v1/user/user', user_routes);
+app.use('/api/v1/user/address', address_routes);
+app.use('/api/v1/user/creditcards', creditcards_routes);
+app.use('/api/v1/user/demands', demands_routes);
+
 
 if (DEBUG_TRACE_LEVEL >= 2) {
     console.log('6.app');

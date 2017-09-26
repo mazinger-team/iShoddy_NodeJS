@@ -7,11 +7,12 @@ let Schema = mongoose.Schema;
 
 // We create the schema of the object
 let ProfessionalSchema = Schema({
-    user_id: String,
-    user_name: String,
-    demands: [String],
-    category: String,       // Si usamos Id tipo Number?
-    subcategory: String,    // Si usamos Id tipo Number?
+
+    userId: String,
+    userName: String,
+    demands: [{ type: Schema.ObjectId, ref: "Demand" }],
+    subcategory: { type: Schema.ObjectId, ref: "Subcategory" },
+    category: { type: Schema.ObjectId, ref: "Category" },
     corp_name: String,
     logo_url: String,
     images_url: [String],
