@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-    database: 'mongodb://localhost:27017/ishoddy',
+    database: 'mongodb://nodeuser:kcmongo2017@localhost:27017/ishoddy',
     jwt: {
         secret : 'nodemon1234@',
         expires: '2 days'
