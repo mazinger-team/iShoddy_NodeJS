@@ -55,13 +55,13 @@ function saveProfessional(req, res) {
             if (DEBUG_TRACE_LEVEL >= 1) {
                 console.log('2.Request failed');
             }
-            return errorHandler(new Error('Request failed'), res, 500);
+            return errorHandler(new Error('Request failed'), "An error occurred in the query", res, 500);
         } else {
             if (!professionalSave) {
                 if (DEBUG_TRACE_LEVEL >= 1) {
                     console.log('3.Unsaved Professional');
                 }
-                return errorHandler(new Error('Unsaved Professional'), res, 404);
+                return errorHandler(new Error('Unsaved Professional'), "The professional could not save", res, 404);
             } else {
                 if (DEBUG_TRACE_LEVEL >= 1) {
                     console.log("4.Professional created correctly. professionalSave: ", professionalSave)
@@ -95,13 +95,13 @@ function editProfessional(req, res) {
             if (DEBUG_TRACE_LEVEL >= 1) {
                 console.log('2.Request failed');
             }
-            return errorHandler(new Error('Request failed'), res, 500);
+            return errorHandler(new Error('Request failed'), "An error occurred in the query", res, 500);
         } else {
             if (!professionalUpdated) {
                 if (DEBUG_TRACE_LEVEL >= 1) {
                     console.log('3.Professional not found to update');
                 }
-                return errorHandler(new Error('Professional not found to update'), res, 404);
+                return errorHandler(new Error('The professional to modify does not exist'), "The professional to modify does not exist", res, 404);
             } else {
                 if (DEBUG_TRACE_LEVEL >= 1) {
                     console.log('4.Professionally updated correctly. professionalUpdated: ', professionalUpdated);
@@ -133,13 +133,13 @@ function deleteProfessional(req, res) {
             if (DEBUG_TRACE_LEVEL >= 1) {
                 console.log('2.Request failed');
             }
-            return errorHandler(new Error('Request failed'), res, 500);
+            return errorHandler(new Error('Request failed'), "An error occurred in the query", res, 500);
         } else {
             if (!professionalRemoved) {
                 if (DEBUG_TRACE_LEVEL >= 1) {
                     console.log('3.Professional not found to to delete');
                 }
-                return errorHandler(new Error('Professional not found to to delete'), res, 404);
+                return errorHandler(new Error('The professional to delete does not exist'), "The professional to delete does not exist", res, 404);
             } else {
                 if (DEBUG_TRACE_LEVEL >= 1) {
                     console.log('4.Professional deleted correctly. professionalRemoved: ', professionalRemoved);
@@ -180,7 +180,12 @@ function getProfessionalById(req, res) {
             console.log('professionalId is informed, so it will be used in the filter. professionalId: ', professionalId);
         }
 
-        Professional.findById(professionalId, (err, professional) => {
+        Professional
+            .findById(professionalId)
+            .populate('category','name')
+            .populate('subcategory','name')
+            .populate('demands._id','title')
+            .exec((err, professional) => {
             if (DEBUG_TRACE_LEVEL >= 1) {
                 console.log('1.getProfessionalById.findById');
             }
@@ -192,21 +197,21 @@ function getProfessionalById(req, res) {
                     console.log('2.Request failed');
                 }
 
-                return errorHandler(new Error('Request failed'), res, 500);
+                return errorHandler(new Error('Request failed'), "An error occurred in the query", res, 500);
             } else {
                 if (!professional) {
                     if (DEBUG_TRACE_LEVEL >= 1) {
                         console.log('3.The professional does not exist');
                     }
 
-                    return errorHandler(new Error('The professional does not exist'), res, 404);
+                    return errorHandler(new Error('The professional does not exist'), "The professional does not exist", res, 404);
 
                 } else {
                     if (DEBUG_TRACE_LEVEL >= 1) {
                         console.log('4.The professional has recovered. professional: ', professional);
                     }
                     //Se responde con un JSON con la información recuperada de la BBDD
-                    return responseHandler('The professional has recovered', res, 200, professional, parameters.models.professionals);
+                    return responseHandler('The professional has recovered', res, 200, professional, parameters.models.professionalDetail);
                 }
             }
         });
@@ -472,35 +477,47 @@ function getProfessionalsByQuery(req, res) {
             console.log('1.professionals.get standard find');
         }
         list(Professional, query, sort, limit, skip, fields, (err, professionals) => {
-            if (DEBUG_TRACE_LEVEL >= 1) {
-                console.log('1.professionals.get.list');
-            }
+            Professional.populate(professionals, {path: "category",select: 'name'}, function(err,professionals) {
+                Professional.populate(professionals, {
+                    path: "subcategory",
+                    select: 'name'
+                }, function (err, professionals) {
+                    Professional.populate(professionals, {
+                        path: "demand",
+                        select: 'title'
+                    }, function (err, professionals) {
+                        if (DEBUG_TRACE_LEVEL >= 1) {
+                            console.log('1.professionals.get.list');
+                        }
 
-            //Query if there was an error in the query
-            if (err) {
-                if (DEBUG_TRACE_LEVEL >= 1) {
-                    console.log('2.Request failed');
-                }
+                        //Query if there was an error in the query
+                        if (err) {
+                            if (DEBUG_TRACE_LEVEL >= 1) {
+                                console.log('2.Request failed');
+                            }
 
-                return errorHandler(new Error('Request failed'), "An error occurred in the query", res, 500);
-            }
+                            return errorHandler(new Error('Request failed'), "An error occurred in the query", res, 500);
+                        }
 
-            //There was no error in the query
-            //It is checked if professionals have recovered
-            if (professionals.length === 0) {
-                if (DEBUG_TRACE_LEVEL >= 1) {
-                    console.log('3.No professionals found');
-                }
+                        //There was no error in the query
+                        //It is checked if professionals have recovered
+                        if (professionals.length === 0) {
+                            if (DEBUG_TRACE_LEVEL >= 1) {
+                                console.log('3.No professionals found');
+                            }
 
-                return errorHandler(new Error('No professionals found'),"No professionals were found with the search parameters indicated", res, 404);
-            }
+                            return errorHandler(new Error('No professionals found'), "No professionals were found with the search parameters indicated", res, 404);
+                        }
 
-            //It responds with a JSON with the information retrieved from the BBDD
-            if (DEBUG_TRACE_LEVEL >= 1) {
-                console.log('4.Professionals have recovered. professionals: ', professionals);
-            }
+                        //It responds with a JSON with the information retrieved from the BBDD
+                        if (DEBUG_TRACE_LEVEL >= 1) {
+                            console.log('4.Professionals have recovered. professionals: ', professionals);
+                        }
 
-            return responseHandler('Professionals have recovered', res, 200, professionals, parameters.models.professionals, page);
+                        return responseHandler('Professionals have recovered', res, 200, professionals, parameters.models.professionals, page);
+                    })
+                })
+            })
         });
     } else {
         console.log('1');
@@ -532,55 +549,40 @@ function getProfessionalsByQuery(req, res) {
             filter[3] = { $fields: fields };
         }
 
-        Professional.aggregate([filter],(err,professionals) => {
-            //Query if there was an error in the query
-            if (err) {
-                if (DEBUG_TRACE_LEVEL >= 1) {
-                    console.log('2.Request failed');
-                }
 
-                return errorHandler(new Error('Request failed'), "An error occurred in the query", res, 500);
-            }
 
-            //There was no error in the query
-            //It is checked if professionals have recovered
-            if (professionals.length === 0) {
-                if (DEBUG_TRACE_LEVEL >= 1) {
-                    console.log('3.No professionals found');
-                }
+        Professional.aggregate([filter], function(err,professionals) {
+                Professional.populate(professionals, {path: "category",select: 'name'}, function(err,professionals) {
+                    Professional.populate(professionals, {path: "subcategory", select: 'name'}, function (err, professionals) {
+                        Professional.populate(professionals, {path: "demand", select: 'title'}, function (err, professionals) {
+                            //Query if there was an error in the query
+                            if (err) {
+                                if (DEBUG_TRACE_LEVEL >= 1) {
+                                    console.log('2.Request failed');
+                                }
 
-                return errorHandler(new Error('No professionals found'), "No professionals were found with the search parameters indicated", res, 404);
-            }
+                                return errorHandler(new Error('Request failed'), "An error occurred in the query", res, 500);
+                            }
 
-            //It responds with a JSON with the information retrieved from the BBDD
-            if (DEBUG_TRACE_LEVEL >= 1) {
-                console.log('4.Professionals have recovered. professionals: ', professionals);
-            }
+                            //There was no error in the query
+                            //It is checked if professionals have recovered
+                            if (professionals.length === 0) {
+                                if (DEBUG_TRACE_LEVEL >= 1) {
+                                    console.log('3.No professionals found');
+                                }
 
-            return responseHandler('Professionals have recovered', res, 200, professionals, parameters.models.professionals, page);
+                                return errorHandler(new Error('No professionals found'), "No professionals were found with the search parameters indicated", res, 404);
+                            }
 
-            /*
+                            //It responds with a JSON with the information retrieved from the BBDD
+                            if (DEBUG_TRACE_LEVEL >= 1) {
+                                console.log('4.Professionals have recovered. professionals: ', professionals);
+                            }
 
-            if (err) {
-                    next(err);
-                    return;
-                }
-
-                res.json({
-                    "headerData": {
-                        pagination: {
-                            paginationFlag: professionals.length === size,
-                            paginationKey: page,
-                            paginationElements: professionals.length
-                        }
-                    },
-                    "listProfessionalsOutputType": {
-                        "professionals" : professionals
-                    }
+                            return responseHandler('Professionals have recovered', res, 200, professionals, parameters.models.professionals, page);
+                        })
+                    })
                 })
-            });
-
-            */
         });
     }
 }

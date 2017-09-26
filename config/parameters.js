@@ -3,6 +3,7 @@
 module.exports = {
     models: {
         professionals: 'Professionals',
+        professionalDetail: 'ProfessionalDetail',
         categories: 'Categories',
         subcategories: 'Subcategories',
         demands: 'Demands'

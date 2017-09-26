@@ -38,6 +38,11 @@ function responseHandler(msg, res, sta, element, typeElement, page) {
                 categories: [ element ]
             };
             break;
+        case parameters.models.professionalDetail:
+            filter["getProfessionalDetailOutputType"] = {
+                professional : element
+            };
+            break;
         default:
             break;
     }
