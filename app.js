@@ -53,7 +53,7 @@ require('./models/CreditCard');
 require('./models/Demand');
 require('./models/Offer');
 require('./models/OfferConcept');
-// require('./models/Professional');
+require('./models/Professional');
 require('./models/Subcategory');
 require('./models/User');
 
@@ -63,9 +63,9 @@ let professional_routes = require('./routes/api/v1/professional');
 let categories_routes = require('./routes/api/v1/categories');
 let subcategories_routes = require('./routes/api/v1/subcategories');
 let offers_routes = require('./routes/api/v1/offers');
-let offerconcepts_routes = require('./routes/api/v1/offerconcepts');
+let offerconcepts_routes = require('./routes/api/v1/offerConcepts');
 let user_routes = require('./routes/api/v1/user/user');
-let address_routes = require('./routes/api/v1//user/address');
+let address_routes = require('./routes/api/v1/user/address');
 let creditcards_routes = require('./routes/api/v1/user/creditcards');
 let demands_routes = require('./routes/api/v1/user/demands');
 
@@ -113,18 +113,18 @@ if (DEBUG_TRACE_LEVEL >= 2) {
 
 
 /*
-app.use('/', index_routes);
-app.use('/users', users);
+ app.use('/', index_routes);
+ app.use('/users', users);
 
-// rutes (mock & real)
-app.use('/api/v1', require('./controllers/professionals/professionals'));
-*/
+ // rutes (mock & real)
+ app.use('/api/v1', require('./controllers/professionals/professionals'));
+ */
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  let err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+    let err = new Error('Not Found');
+    err.status = 404;
+    next(err);
 });
 
 if (DEBUG_TRACE_LEVEL >= 2) {
@@ -134,13 +134,13 @@ if (DEBUG_TRACE_LEVEL >= 2) {
 
 // error handler
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+    // render the error page
+    res.status(err.status || 500);
+    res.render('error');
 });
 
 if (DEBUG_TRACE_LEVEL >= 2) {
