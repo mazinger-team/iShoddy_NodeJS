@@ -29,12 +29,12 @@ if (cluster.isMaster) {
     //Clones are created
     //The CPU number of the machine is queried
     let numCPUs = require('os').cpus().length;
-    console.log('Starting cluster with %s cluster ', numCPUs);
+    console.log('Starting cluster with %s cluster: ', numCPUs);
 
     //A clone is started by each of the machine cores
     for (let i = 0; i < numCPUs; i++) {
         let worker = cluster.fork();
-        console.log('Cluster %s started', worker.process.pid);
+        console.log('Cluster %s started: ', worker.process.pid);
     }
 } else {
     //Starting a clone (fork)

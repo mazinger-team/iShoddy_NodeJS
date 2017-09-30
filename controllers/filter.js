@@ -23,11 +23,11 @@ let list = function (model, filter, sort, limit, skip, fields, result) {
 
     if (DEBUG_TRACE_LEVEL >= 2) {
         console.log('** Parameters before the consultation **');
-        console.log('filter', filter);
-        console.log('sort', sort);
-        console.log('limit', limit);
-        console.log('skip', skip);
-        console.log('fields', fields);
+        console.log('filter: ', filter);
+        console.log('sort: ', sort);
+        console.log('limit: ', limit);
+        console.log('skip: ', skip);
+        console.log('fields: ', fields);
     }
 
     //The query is executed

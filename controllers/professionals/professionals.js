@@ -17,7 +17,7 @@ function getProfessionals(req, res) {
     }
 
     if (DEBUG_TRACE_LEVEL >= 2) {
-        console.log('req.query.id', req.query.id);
+        console.log('req.query.id: ', req.query.id);
     }
 
     if (typeof req.query.id !== 'undefined') {
@@ -43,7 +43,7 @@ function saveProfessional(req, res) {
 
     if (DEBUG_TRACE_LEVEL >= 2) {
         console.log('Parameters before entering function');
-        console.log('req.body', req.body);
+        console.log('req.body: ', req.body);
     }
 
     professional.save((err, professionalSave) => {
@@ -83,7 +83,7 @@ function editProfessional(req, res) {
 
     if (DEBUG_TRACE_LEVEL >= 2) {
         console.log('Parameters before entering function');
-        console.log('professionalId', professionalId);
+        console.log('professionalId: ', professionalId);
     }
 
 
@@ -122,7 +122,7 @@ function deleteProfessional(req, res) {
 
     if (DEBUG_TRACE_LEVEL >= 2) {
         console.log('Parameters before entering function');
-        console.log('professionalId', professionalId);
+        console.log('professionalId: ', professionalId);
     }
 
     Professional.findByIdAndRemove(professionalId, (err, professionalRemoved) => {
@@ -159,7 +159,7 @@ function getProfessionalById(req, res) {
 
     if (DEBUG_TRACE_LEVEL >= 2) {
         console.log('Parameters before entering function');
-        console.log('req.query.id', req.query.id);
+        console.log('req.query.id: ', req.query.id);
     }
 
     //It retrieves the input parameters that arrive in the GET (URL)
@@ -168,7 +168,7 @@ function getProfessionalById(req, res) {
 
     if (DEBUG_TRACE_LEVEL >= 2) {
         console.log('Assigned Parameters');
-        console.log('professionalId', professionalId);
+        console.log('professionalId: ', professionalId);
     }
 
     if (DEBUG_TRACE_LEVEL >= 1) {
@@ -252,52 +252,52 @@ function getProfessionalsByQuery(req, res) {
         rating = req.query.rating;
 
     // Geo params
-
-    console.log('parameters.query.min_distance', parameters.query.min_distance);
-
-    let min = req.query.min || parameters.query.min_distance,
-        max = req.query.max || parameters.query.max_distance;
+    let min = parseInt(req.query.min) || parseInt(parameters.query.min_distance),
+        max = parseInt(req.query.max) || parseInt(parameters.query.max_distance);
 
     // Query params
     let sort = req.query.sort || null,
-        page = parseInt(req.query.page || 0),
-        size = parameters.query.num_elements,
-        skip = page > 0 ? ((page - 1) * size) : 0,
-        limit = req.query.limit || parameters.query.num_elements,
-        fields = req.query.fields || null;
+        page = parseInt(req.query.page) || 0,
+        size = parseInt(req.query.size) || parseInt(parameters.query.num_elements),
+        skip = page > 0 ? parseInt(((page - 1) * size)) : 0,
+        limit = parseInt(req.query.limit) || parseInt(size),
+        fields = typeof req.query.fields !== 'undefined' ? JSON.stringify(req.query.fields) : parameters.query.professional_fields;
+
+        console.log()
+
 
     if (DEBUG_TRACE_LEVEL >= 2) {
-        console.log('req.query.user_id',req.query.user_id);
-        console.log('req.query.user_name',req.query.user_name);
-        console.log('req.query.category',req.query.category);
-        console.log('req.query.subcategory',req.query.subcategory);
-        console.log('req.query.corp_name',req.query.corp_name);
-        console.log('req.query.description',req.query.description);
-        console.log('req.query.fiscal_id',req.query.fiscal_id);
-        console.log('req.query.street',req.query.street);
-        console.log('req.query.postal_code',req.query.postal_code);
-        console.log('req.query.area',req.query.area);
-        console.log('req.query.city',req.query.city);
-        console.log('req.query.province',req.query.province);
-        console.log('req.query.gps_lat',req.query.gps_lat);
-        console.log('req.query.gps_lon',req.query.gps_lon);
-        console.log('req.query.web_url',req.query.web_url);
-        console.log('req.query.email',req.query.email);
-        console.log('req.query.telephone',req.query.telephone);
-        console.log('req.query.opening_hours',req.query.opening_hours);
-        console.log('req.query.register_date',req.query.register_date);
-        console.log('req.query.rate_visit',req.query.rate_visit);
-        console.log('req.query.rate_hour',req.query.rate_hour);
-        console.log('req.query.rate_notes',req.query.rate_notes);
-        console.log('req.query.rating_accumulated',req.query.rating_accumulated);
-        console.log('req.query.rating_votes',req.query.rating_votes);
-        console.log('req.query.rating',req.query.rating);
-        console.log('req.query.min',req.query.min);
-        console.log('req.query.max',req.query.max);
-        console.log('req.query.sort',req.query.sort);
-        console.log('req.query.page',req.query.page);
-        console.log('req.query.limit',req.query.limit);
-        console.log('req.query.fields',req.query.fields);
+        console.log('req.query.user_id: ',req.query.user_id);
+        console.log('req.query.user_name: ',req.query.user_name);
+        console.log('req.query.category: ',req.query.category);
+        console.log('req.query.subcategory: ',req.query.subcategory);
+        console.log('req.query.corp_name: ',req.query.corp_name);
+        console.log('req.query.description: ',req.query.description);
+        console.log('req.query.fiscal_id: ',req.query.fiscal_id);
+        console.log('req.query.street: ',req.query.street);
+        console.log('req.query.postal_code: ',req.query.postal_code);
+        console.log('req.query.area: ',req.query.area);
+        console.log('req.query.city: ',req.query.city);
+        console.log('req.query.province: ',req.query.province);
+        console.log('req.query.gps_lat: ',req.query.gps_lat);
+        console.log('req.query.gps_lon: ',req.query.gps_lon);
+        console.log('req.query.web_url: ',req.query.web_url);
+        console.log('req.query.email: ',req.query.email);
+        console.log('req.query.telephone: ',req.query.telephone);
+        console.log('req.query.opening_hours: ',req.query.opening_hours);
+        console.log('req.query.register_date: ',req.query.register_date);
+        console.log('req.query.rate_visit: ',req.query.rate_visit);
+        console.log('req.query.rate_hour: ',req.query.rate_hour);
+        console.log('req.query.rate_notes: ',req.query.rate_notes);
+        console.log('req.query.rating_accumulated: ',req.query.rating_accumulated);
+        console.log('req.query.rating_votes: ',req.query.rating_votes);
+        console.log('req.query.rating: ',req.query.rating);
+        console.log('req.query.min: ',req.query.min);
+        console.log('req.query.max: ',req.query.max);
+        console.log('req.query.sort: ',req.query.sort);
+        console.log('req.query.page: ',req.query.page);
+        console.log('req.query.limit: ',req.query.limit);
+        console.log('req.query.fields: ',req.query.fields);
     }
 
     let counterCoor = 0,
@@ -437,39 +437,40 @@ function getProfessionalsByQuery(req, res) {
     }
 
     if (DEBUG_TRACE_LEVEL >= 2) {
-        console.log('user_id', user_id);
-        console.log('user_name', user_name);
-        console.log('category', category);
-        console.log('subcategory', subcategory);
-        console.log('corp_name', corp_name);
-        console.log('description', description);
-        console.log('fiscal_id', fiscal_id);
-        console.log('street', street);
-        console.log('postal_code', postal_code);
-        console.log('area', area);
-        console.log('city', city);
-        console.log('province', province);
-        console.log('gps_lat', gps_lat);
-        console.log('gps_lon', gps_lon);
-        console.log('web_url', web_url);
-        console.log('email', email);
-        console.log('telephone', telephone);
-        console.log('opening_hours', opening_hours);
-        console.log('register_date', register_date);
-        console.log('rate_visit', rate_visit);
-        console.log('rate_hour', rate_hour);
-        console.log('rate_notes', rate_notes);
-        console.log('rating_accumulated', rating_accumulated);
-        console.log('rating_votes', rating_votes);
-        console.log('rating', rating);
-        console.log('min',min);
-        console.log('max',max);
-        console.log('sort',sort);
-        console.log('page',page);
-        console.log('size',size);
-        console.log('skip',skip);
-        console.log('limit',limit);
-        console.log('fields',fields);
+        console.log('user_id: ', user_id);
+        console.log('user_name: ', user_name);
+        console.log('category: ', category);
+        console.log('subcategory: ', subcategory);
+        console.log('corp_name: ', corp_name);
+        console.log('description: ', description);
+        console.log('fiscal_id: ', fiscal_id);
+        console.log('street: ', street);
+        console.log('postal_code: ', postal_code);
+        console.log('area: ', area);
+        console.log('city: ', city);
+        console.log('province: ', province);
+        console.log('gps_lat: ', gps_lat);
+        console.log('gps_lon: ', gps_lon);
+        console.log('web_url: ', web_url);
+        console.log('email: ', email);
+        console.log('telephone: ', telephone);
+        console.log('opening_hours: ', opening_hours);
+        console.log('register_date: ', register_date);
+        console.log('rate_visit: ', rate_visit);
+        console.log('rate_hour: ', rate_hour);
+        console.log('rate_notes: ', rate_notes);
+        console.log('rating_accumulated: ', rating_accumulated);
+        console.log('rating_votes: ', rating_votes);
+        console.log('rating: ', rating);
+        console.log('min: ',min);
+        console.log('max: ',max);
+        console.log('sort: ',sort);
+        console.log('page: ',page);
+        console.log('size: ',size);
+        console.log('skip: ',skip);
+        console.log('limit: ',limit);
+        console.log('fields: ',fields);
+        console.log('query: ',query);
     }
 
     if (counterCoor < 2) {
@@ -478,14 +479,8 @@ function getProfessionalsByQuery(req, res) {
         }
         list(Professional, query, sort, limit, skip, fields, (err, professionals) => {
             Professional.populate(professionals, {path: "category",select: 'name'}, function(err,professionals) {
-                Professional.populate(professionals, {
-                    path: "subcategory",
-                    select: 'name'
-                }, function (err, professionals) {
-                    Professional.populate(professionals, {
-                        path: "demand",
-                        select: 'title'
-                    }, function (err, professionals) {
+                Professional.populate(professionals, {path: "subcategory", select: 'name'}, function (err, professionals) {
+                    Professional.populate(professionals, {path: "demand", select: 'title'}, function (err, professionals) {
                         if (DEBUG_TRACE_LEVEL >= 1) {
                             console.log('1.professionals.get.list');
                         }
@@ -520,11 +515,14 @@ function getProfessionalsByQuery(req, res) {
             })
         });
     } else {
-        console.log('1');
+        if (DEBUG_TRACE_LEVEL >= 1) {
+            console.log('1.professionals.get location find');
+        }
+
         let filter = [{
             $geoNear: {
                 near: { type: "Point",coordinates: [parseFloat(gps_lon), parseFloat(gps_lat)] }
-                ,minDistance: min /* Distancia mínima en metros */
+                ,minDistance: parseInt(min) /* Distancia mínima en metros */
                 //,maxDistance: max /* Distancia máxima en metros */
                 ,spherical: true /* tipo de búsqueda. Mejor no tocar esto */
                 ,distanceField: "distance" /* Campo en el que se añade la distancia calculada */
@@ -545,44 +543,46 @@ function getProfessionalsByQuery(req, res) {
             filter[2] = { $limit: limit };
         }
 
-        if (fields !== null) {
-            filter[3] = { $fields: fields };
+        if (typeof fields !== 'undefined') {
+            filter[3] = { $project : fields };
         }
 
-
+        if (DEBUG_TRACE_LEVEL >= 2) {
+            console.log('filter: ',filter);
+        }
 
         Professional.aggregate([filter], function(err,professionals) {
-                Professional.populate(professionals, {path: "category",select: 'name'}, function(err,professionals) {
-                    Professional.populate(professionals, {path: "subcategory", select: 'name'}, function (err, professionals) {
-                        Professional.populate(professionals, {path: "demand", select: 'title'}, function (err, professionals) {
-                            //Query if there was an error in the query
-                            if (err) {
-                                if (DEBUG_TRACE_LEVEL >= 1) {
-                                    console.log('2.Request failed');
-                                }
-
-                                return errorHandler(new Error('Request failed'), "An error occurred in the query", res, 500);
-                            }
-
-                            //There was no error in the query
-                            //It is checked if professionals have recovered
-                            if (professionals.length === 0) {
-                                if (DEBUG_TRACE_LEVEL >= 1) {
-                                    console.log('3.No professionals found');
-                                }
-
-                                return errorHandler(new Error('No professionals found'), "No professionals were found with the search parameters indicated", res, 404);
-                            }
-
-                            //It responds with a JSON with the information retrieved from the BBDD
+            Professional.populate(professionals, {path: "category",select: 'name'}, function(err,professionals) {
+                Professional.populate(professionals, {path: "subcategory", select: 'name'}, function (err, professionals) {
+                    Professional.populate(professionals, {path: "demand", select: 'title'}, function (err, professionals) {
+                        //Query if there was an error in the query
+                        if (err) {
                             if (DEBUG_TRACE_LEVEL >= 1) {
-                                console.log('4.Professionals have recovered. professionals: ', professionals);
+                                console.log('2.Request failed');
                             }
 
-                            return responseHandler('Professionals have recovered', res, 200, professionals, parameters.models.professionals, page);
-                        })
+                            return errorHandler(new Error('Request failed'), "An error occurred in the query", res, 500);
+                        }
+
+                        //There was no error in the query
+                        //It is checked if professionals have recovered
+                        if (professionals.length === 0) {
+                            if (DEBUG_TRACE_LEVEL >= 1) {
+                                console.log('3.No professionals found');
+                            }
+
+                            return errorHandler(new Error('No professionals found'), "No professionals were found with the search parameters indicated", res, 404);
+                        }
+
+                        //It responds with a JSON with the information retrieved from the BBDD
+                        if (DEBUG_TRACE_LEVEL >= 1) {
+                            console.log('4.Professionals have recovered. professionals: ', professionals);
+                        }
+
+                        return responseHandler('Professionals have recovered', res, 200, professionals, parameters.models.professionals, page);
                     })
                 })
+            })
         });
     }
 }
