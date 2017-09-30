@@ -30,7 +30,7 @@ function responseHandler(msg, res, sta, element, typeElement, page) {
     switch(typeElement) {
         case parameters.models.professionals:
             filter["listProfessionalsOutputType"] = {
-                professionals: [ element ]
+                professionals: element
             };
             break;
         case parameters.models.categories:
