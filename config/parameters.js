@@ -14,6 +14,7 @@ module.exports = {
         max_distance: 1000000000,
         professional_fields: {
             user_name:1,
+            corp_name:1,
             category:1,
             logo_url:1,
             rating:1,
