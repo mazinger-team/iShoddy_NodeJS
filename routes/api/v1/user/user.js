@@ -13,6 +13,7 @@ let deleteRoute = require('./../../../../controllers/deleteRoute');
 
 let model = User;
 
+let UserController = require('./../../../../controllers/users/users'); // Load the controller module
 
 
 router.get('/', function (req, res, next) {
@@ -47,21 +48,13 @@ router.get('/', function (req, res, next) {
 
 });
 
-
-router.post('/', function (req, res, next) {
-    let newModel = new User(req.body);
-    postRoute(newModel, req, res, next);
-
-});
-
+router.post('/', UserController.saveUser);
 
 router.put('/:id', function (req, res, next) {
     var id = req.params.id;
     putRoute(model, id, req, res, next);
 
-
 });
-
 
 router.delete('/:id', function (req, res, next) {
     var id = req.params.id;
