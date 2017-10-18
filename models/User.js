@@ -1,32 +1,177 @@
 "use strict";
 
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
+const validator = require('validator');
+const jwt = require('jsonwebtoken');
+const _ = require('lodash');
+const bcrypt = require('bcryptjs');
+
 var Schema = mongoose.Schema;
 
-var userSchema = Schema({
+var UserSchema = new mongoose.Schema({
 
+    email: {
+        type: String,
+        required: true,
+        trim: true,
+        minlength: 1,
+        unique: true,
+        validate: {
+            validator: validator.isEmail,
+            message: '{VALUE} is not a valid email'
+        }
+    },
+    password: {
+        type: String,
+        required: true,
+        minlength: 6
+    },
+    tokens: [{
+        access: {
+            type: String,
+            required: true
+        },
+        token: {
+            type: String,
+            required: true
+        }
+    }],
     name: String,
     lastName: String,
-    email: String,
-    password: String,
     telephone: Number,
-    addresses : [{type: Schema.ObjectId, ref: "Address" }],
-    professionals : [{type: Schema.ObjectId, ref: "Professional" }],
-    demands: [{ type: Schema.ObjectId, ref: "Demand" }],
-    favorites : [{type: Schema.ObjectId, ref: "Professional" }],
-    creditCards: [{type: Schema.ObjectId, ref: "CreditCard" }],
+    addresses: [{type: Schema.ObjectId, ref: "Address"}],
+    professionals: [{type: Schema.ObjectId, ref: "Professional"}],
+    demands: [{type: Schema.ObjectId, ref: "Demand"}],
+    favorites: [{type: Schema.ObjectId, ref: "Professional"}],
+    creditCards: [{type: Schema.ObjectId, ref: "CreditCard"}],
     ratingAccumulate: Number,
     ratingVotes: Number,
     rating: Number,
-    modificationDay:{type: Date, default: Date.now }
+    modificationDay: {type: Date, default: Date.now}
 
 }, {
     versionKey: false   // No añade parámetro de version (__v)
 
 });
 
+UserSchema.methods.toJSON = function () {
 
-// Export schema
-module.exports = mongoose.model('User', userSchema);
+    var user = this;
+    var userObject = user.toObject();
+
+    return _.pick(userObject, ['_id', 'email']);
+};
+
+UserSchema.methods.generateAuthToken = function () {
+    var user = this;
+    var access = 'auth';
+    //-- TODO: jwt_secret --
+    // var token = jwt.sign({_id: user._id.toHexString(), access}, process.env.JWT_SECRET).toString();
+    var token = jwt.sign({_id: user._id.toHexString(), access}, 'abcd1234!').toString();
+
+    user.tokens.push({access, token});
+
+    return user.save().then(() => {
+        return token;
+    });
+};
+
+UserSchema.methods.removeToken = function (token) {
+    var user = this;
+
+    return user.update({
+        $pull: {
+            tokens: {token}
+        }
+    });
+};
+
+UserSchema.statics.findByToken = function (token) {
+    var User = this;
+    var decoded;
+
+    try {
+        //-- TODO: jwt_secret --
+        // decoded = jwt.verify(token, process.env.JWT_SECRET);
+        decoded = jwt.verify(token, 'abcd1234!');
+    } catch (e) {
+        return Promise.reject();
+    }
+
+    return User.findOne({
+        '_id': decoded._id,
+        'tokens.token': token,
+        'tokens.access': 'auth'
+    });
+};
+
+UserSchema.statics.findByCredentials = function (email, password) {
+
+    var User = this;
+
+    return User.findOne({email}).then((user) => {
+        if (!user) {
+            return Promise.reject();
+        }
+
+        return new Promise((resolve, reject) => {
+
+            bcrypt.compare(password, user.password, (err, res) => {
+                if (res) {
+                    resolve(user);
+                } else {
+                    reject();
+                }
+            });
+        });
+    });
+};
+
+UserSchema.pre('save', function (next) {
+    var user = this;
+
+    if (user.isModified('password')) {
+
+        bcrypt.genSalt(10, (err, salt) => {
+            bcrypt.hash(user.password, salt, (err, hash) => {
+                user.password = hash;
+                next();
+            });
+        });
+
+    } else {
+        next();
+    }
+});
+
+var User = mongoose.model('User', UserSchema);
+
+module.exports = {User};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

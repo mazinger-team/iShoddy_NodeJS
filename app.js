@@ -24,7 +24,7 @@ if (DEBUG_TRACE_LEVEL >= 2) {
 
 let app = express();
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({extended: false}));
 //We convert json objects to the data we receive from http requests
 app.use(bodyParser.json());
 app.use(logger('dev'));
@@ -55,7 +55,9 @@ require('./models/Offer');
 require('./models/OfferConcept');
 require('./models/Professional');
 require('./models/Subcategory');
-require('./models/User');
+//-- TODO: commented --
+// require('./models/User');
+//--
 
 
 ////// We load the Routes ////////
@@ -64,10 +66,12 @@ let categories_routes = require('./routes/api/v1/categories');
 let subcategories_routes = require('./routes/api/v1/subcategories');
 let offers_routes = require('./routes/api/v1/offers');
 let offerconcepts_routes = require('./routes/api/v1/offerConcepts');
-let user_routes = require('./routes/api/v1/user/user');
-let address_routes = require('./routes/api/v1/user/address');
-let creditcards_routes = require('./routes/api/v1/user/creditcards');
-let demands_routes = require('./routes/api/v1/user/demands');
+let user_routes = require('./routes/api/v1/user');
+//-- TODO: commented --
+// let address_routes = require('./routes/api/v1/user/address');
+// let creditcards_routes = require('./routes/api/v1/user/creditcards');
+// let demands_routes = require('./routes/api/v1/user/demands');
+//--
 
 
 /// Mocks ///
@@ -89,11 +93,13 @@ app.use('/api/v1/categories', categories_routes);
 app.use('/api/v1/subcategories', subcategories_routes);
 app.use('/api/v1/offers', offers_routes);
 app.use('/api/v1/offerconcepts', offerconcepts_routes);
-app.use('/api/v1/user/user', user_routes);
-app.use('/api/v1/user/address', address_routes);
-app.use('/api/v1/user/creditcards', creditcards_routes);
-app.use('/api/v1/user/demands', demands_routes);
-
+app.use('/api/v1/user', user_routes);
+//-- TODO: commented --
+// app.use('/api/v1/user/user', user_routes);
+// app.use('/api/v1/user/address', address_routes);
+// app.use('/api/v1/user/creditcards', creditcards_routes);
+// app.use('/api/v1/user/demands', demands_routes);
+//--
 
 if (DEBUG_TRACE_LEVEL >= 2) {
     console.log('6.app');
@@ -121,7 +127,7 @@ if (DEBUG_TRACE_LEVEL >= 2) {
  */
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     let err = new Error('Not Found');
     err.status = 404;
     next(err);
@@ -131,9 +137,8 @@ if (DEBUG_TRACE_LEVEL >= 2) {
     console.log('8.app');
 }
 
-
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
     // set locals, only providing error in development
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -154,5 +159,33 @@ module.exports = app;
 if (DEBUG_TRACE_LEVEL >= 2) {
     console.log('10.app');
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
