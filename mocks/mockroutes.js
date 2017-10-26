@@ -1,11 +1,11 @@
 'use strict';
 
-var fs = require('fs');
-var express = require('express');
-var path = require('path');
-var mockRouter = express.Router();
+let fs = require('fs');
+let express = require('express');
+let path = require('path');
+let mockRouter = express.Router();
 
-var data = {
+let data = {
 
     getLoginProfessional: JSON.parse(fs.readFileSync(__dirname+'/loginProfessional.json', 'utf8')),
     postListProfessionals: JSON.parse(fs.readFileSync(__dirname+'/listProfessionalsGeneral.json', 'utf8')),
